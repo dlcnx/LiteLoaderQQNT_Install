@@ -348,7 +348,7 @@ def cleanup_old_bak(qq_exe_path):
 def prepare_for_installation(qq_exe_path):
     check_old_version(qq_exe_path)
     cleanup_old_bak(qq_exe_path)
-    setup_environment_and_move_files(qq_exe_path)
+    # setup_environment_and_move_files(qq_exe_path)
 
 
 def copy_old_files(file_path):
@@ -384,7 +384,7 @@ def patch_index_js(file_path):
         bak_index_path = index_path + ".bak"
         shutil.copyfile(index_path, bak_index_path)
         with open(index_path, "w", encoding="utf-8") as f:
-            f.write(f"require('{os.path.join(file_path, 'resources', 'app', 'LiteLoaderQQNT-main').replace(os.sep, '/')}');\n")
+            f.write("require('../LiteLoaderQQNT-main');\n")
             f.write("require('./launcher.node').load('external_index', module);")
     except Exception as e:
         print(f"修补 index.js 时发生错误: {e}")
